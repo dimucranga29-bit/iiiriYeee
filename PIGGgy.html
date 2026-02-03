@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For iiiri ♡</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        body {
+            /* Cute Gradient Background */
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe6e6 100%);
+            font-family: 'Patrick Hand', cursive; /* Handwritten Font */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating background hearts */
+        body::before {
+            content: "💖 🌸 🎀 🌸 💖";
+            position: absolute;
+            opacity: 0.1;
+            font-size: 40px;
+            width: 100%;
+            top: 10%;
+            animation: float 6s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* The White Card Container */
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
+            border: 2px solid #fff;
+            max-width: 90%;
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 { 
+            color: #d63384; 
+            font-size: 32px; /* Bigger cute text */
+            margin: 15px 0;
+            line-height: 1.2;
+            text-shadow: 1px 1px 0px #fff;
+        }
+
+        .image-container {
+            height: 250px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        img { 
+            width: 220px; 
+            border-radius: 20px;
+            object-fit: contain;
+            /* Soft pink glow around the image */
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2);
+            border: 4px solid white;
+        }
+
+        .buttons { 
+            margin-top: 15px; 
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        button {
+            font-family: 'Patrick Hand', cursive; /* Match the font */
+            font-size: 24px;
+            padding: 10px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: transform 0.1s;
+            box-shadow: 0 4px 10px rgba(219, 112, 147, 0.2);
+        }
+
+        /* Cute Gradient Buttons */
+        .btn-action { 
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: white; 
+            border: 2px solid white;
+        }
+        
+        .btn-safe {
+            background: linear-gradient(to right, #a8e063, #56ab2f);
+            color: white;
+            z-index: 10;
+            border: 2px solid white;
+        }
+
+        .btn-runaway {
+            background: linear-gradient(to right, #ff512f, #dd2476);
+            color: white;
+            position: absolute; 
+            z-index: 100;
+            border: 2px solid white;
+        }
+
+        button:active {
+            transform: scale(0.90);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="image-container">
+            <img id="mainImage" src="https://tenor.com/view/pig-gif-24545612.gif" alt="Cute Pig">
+        </div>
+
+        <h1 id="mainText">me iiiiriiiiye 👉👈</h1>
+        
+        <div class="buttons" id="btnContainer">
+            <button class="btn-action" onclick="nextStep(2)">oooo 🌸</button>
+        </div>
+    </div>
+
+    <script>
+        function nextStep(step) {
+            var img = document.getElementById('mainImage');
+            var txt = document.getElementById('mainText');
+            var btns = document.getElementById('btnContainer');
+
+            if (step === 2) {
+                // SCREEN 2
+                img.src = "https://tenor.com/view/pig-gif-24545612.gif"; 
+                txt.innerHTML = "meee ahanawako iiiiiriyeeee 🐷💕";
+                btns.innerHTML = '<button class="btn-action" onclick="nextStep(3)">ai wadeee 😾😒</button>';
+            } 
+            else if (step === 3) {
+                // SCREEN 3 (THE TRAP)
+                img.src = "https://tenor.com/view/pig-gif-24545612.gif"; 
+                txt.innerHTML = "thause tharahada maa ekka... 🥺💔";
+                
+                btns.innerHTML = ''; 
+                
+                // No button (Safe)
+                var noBtn = document.createElement("button");
+                noBtn.innerHTML = "Na 🫢🤭";
+                noBtn.className = "btn-safe"; 
+                noBtn.onclick = function() { nextStep(4); };
+                btns.appendChild(noBtn);
+
+                // Yes button (Runaway)
+                var yesBtn = document.createElement("button");
+                yesBtn.innerHTML = "Ou ou 😤";
+                yesBtn.className = "btn-runaway"; 
+                yesBtn.id = "runawayBtn";
+                yesBtn.ontouchstart = moveButton; 
+                yesBtn.onmouseover = moveButton;
+                yesBtn.onclick = moveButton; 
+                document.querySelector('.card').appendChild(yesBtn); // Append to card so it floats relative
+            }
+            else if (step === 4) {
+                // SCREEN 4 (CELEBRATION)
+                img.src = "https://tenor.com/view/pig-gif-24545612.gif"; 
+                txt.innerHTML = "heheheheheh man dannwa tharaha na kiyala iiiri maa ekka 🤭💖";
+                
+                btns.innerHTML = "";
+                var runBtn = document.getElementById('runawayBtn');
+                if(runBtn) runBtn.remove();
+                
+                // Add sparkles
+                document.body.style.background = "linear-gradient(135deg, #ffe6e6 0%, #ffcce0 100%)";
+            }
+        }
+
+        function moveButton(e) {
+            if(e) e.preventDefault(); 
+            var btn = document.getElementById('runawayBtn');
+            if (!btn) return;
+
+            // Make the button run further away
+            var x = Math.random() * (window.innerWidth - 100);
+            var y = Math.random() * (window.innerHeight - 100);
+
+            // Keep it somewhat on screen
+            if (x < 50) x = 50;
+            if (y < 50) y = 50;
+
+            btn.style.position = 'fixed'; // Switch to fixed to jump out of card
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+    </script>
+</body>
+</html>
